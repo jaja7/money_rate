@@ -6,6 +6,9 @@ import math
 
 
 def transYearMonth(rateYear):
+    '''
+    年华利率转月利率
+    '''
     return (rateYear)/12
 
 
@@ -30,7 +33,9 @@ def calBase(rateT, numT, huank):
     return base 
 
 def huanKuan(base, rateYear, numYear):
-    
+    '''
+    计算每个周期的还款额
+    '''
     rateT = transYearMonth(rateYear)
     numT = numYear * 12
     return sameAll(base, rateT, numT)
@@ -40,22 +45,23 @@ if __name__ == '__main__':
     rateMon = transYearMonth(0.05)
     print(rateMon)
 
+    # 计算每个月的按揭还款，以验证相关函数
     mon = huanKuan(700000, 0.049, 30)
     print(mon)
+    
+    # 通过按揭以及利率，计算本金
+    base2 = calBase(0.049/12, 30*12, mon)
+    print('test等效本金：', base2)
 
-    base = 1000000
-    rateT = 0.049/12
-    numT = 30*12
-    huank = sameAll(base, rateT, numT)
-    print('月还款：', huank)
 
-    base2 = calBase(0.05, 30, 1460)
+    rateY = 0.09
+    base2 = calBase(rateY, 30, 1460)
     print('渤海30年等效本金：', base2)
 
-    base2 = calBase(0.05, 30, 1580)
+    base2 = calBase(rateY, 30, 1580)
     print('越女推荐30年等效本金：', base2)
 
-    base3 = calBase(0.05, 19, 2020)
-    print('小雨伞20年等效本金：', base3)
+    base3 = calBase(rateY, 19, 2020)
+    print('小雨伞19年等效本金：', base3)
 
     
